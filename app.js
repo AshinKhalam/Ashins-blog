@@ -5,7 +5,8 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 
 
-const Blog = require('./model/blog.js')
+const Blog = require('./model/blog.js');
+const { updateOne } = require('./model/blog.js');
 
 const port = process.env.PORT || 3000;
 
@@ -153,6 +154,37 @@ app.post('/create', (req, res) => {
 
 });
 
+// edit page.................................................
+
+
+
+app.get(`/blog/edit`, (req, res) => {
+
+    Blog.findById(id)
+    .then(result => {
+        console.log(result);
+
+        res.render('edit', { title: 'edit' ,blog:result});
+
+    })
+    .catch(err => console.log(err)) 
+
+
+});
+
+app.post(`/blog/edit`, (req, res) => {
+
+    const blog = updateOne(req.body);
+
+    blog.save()
+        .then(result => {
+            res.redirect('/editor');
+        })
+        .catch(err => console.log(err));
+
+
+
+});
 
 
 

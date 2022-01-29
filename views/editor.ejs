@@ -50,8 +50,9 @@
                       <a href="" class="mr-4 text-danger"><i id="<%= blog._id %>" onclick="deleteBtn(event)"
                           class="far fa-trash-alt"></i></a>
 
-                      <a href="" class="mr-0 text-warning"><i id="<%= blog._id %>" onclick="editBtn(event)"
-                        class="far fa-edit"></i></a>
+                          <a  class="mr-4 text-warning  ">
+                            <i  onclick="editblg(event)"  id ="<%= blog._id %>"  class="far fa-edit"></i>
+                          </a>
                     </div>
                   </div>
                 </div>
@@ -91,25 +92,12 @@
         }
 
 
-        const editBtn = (event) => {
-
-          event.preventDefault();
-          console.log(event.target.id);
-
-          const id = event.target.id;
-
-          const endpoint = `/blog/${id}`;
-
-
-          fetch(endpoint, {
-            method: 'DELETE'
-          })
-            .then(response => response.json())
-            .then(data => window.location.href = '/editor')
-            .catch(err => console.log(err));
-        }
-
-
+        const editblg =(event) =>{
+      //edit blog
+      const  id = event.target.id;
+      window.location.href = `/blog/edit/${id}`;
+    }
+    
 
 
 
